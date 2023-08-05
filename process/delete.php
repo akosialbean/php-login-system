@@ -1,5 +1,5 @@
 <?php
-    require_once "db_conn.php";
+    require_once "../process/update.php";
 
     $user_id = $_POST['user_id'];
 
