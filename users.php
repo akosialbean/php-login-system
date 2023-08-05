@@ -1,4 +1,5 @@
 <?php require_once "db_conn.php"; ?>
+<?php echo session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,9 @@
     <title>Index</title>
 </head>
 <body>
-
+    <form action="logout.php" method="post">
+        <input type="submit" value="Logout" name="submit">
+    </form>
     <form action="insert.php" method="post">
         <label for="first_name">First Name</label>
         <input type="text" name="first_name" id="first_name" placeholder="enter first name"><br>
@@ -37,6 +40,12 @@
             </tr>
         </thead>
         <tbody>
+            <?php
+                // $session = $_SESSION['username']; 
+                // if($session < 1){
+                //     header('Location: ' . 'index.php');
+                // }
+            ?>
             <?php
                 $query = "SELECT * FROM user ORDER BY id DESC";
 

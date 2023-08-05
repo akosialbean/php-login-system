@@ -8,11 +8,11 @@
 
     
 
-    if($db_con){
-        echo "success";
-    }else{
-        echo "failed";
-    }
+    // if($db_con){
+    //     echo "success";
+    // }else{
+    //     echo "failed";
+    // }
 
     if($db_con){
         if(isset($_POST['submit'])){
@@ -22,6 +22,6 @@
             }
         }
     }else{
-        die();
+        // header('Location: ' . 'users.php');
     }
 ?>

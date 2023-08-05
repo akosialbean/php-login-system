@@ -16,7 +16,7 @@
                 $user_id = $_POST['update_userid'];
                 $query = "UPDATE user SET first_name='" . mysqli_real_escape_string($db_con, $first_name) . "', last_name='" . mysqli_real_escape_string($db_con, $last_name) . "', gender='$gender', bdate='$bdate' WHERE id='$user_id'";
                 $db_con->query($query);
-                header('Location: ' . "users.php");
+                header("Location:" . "localhost/php_login_system/users.php");
             }
         ?>
         <?php
