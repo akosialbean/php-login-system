@@ -15,7 +15,7 @@
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../components/logout.php">Welcome <strong><?php echo $_SESSION['username']; ?></strong></a>
-                <a class="navbar-brand" href="../components/logout.php">Logout</a>
+                <a class="navbar-brand" href="../process/logout.php">Logout</a>
             </div>
         </nav>
         <form action="../process/insert.php" method="post">
@@ -39,7 +39,19 @@
                 <label for="bdate" class="form-label">Birthdate:</label>
                 <input type="date" class="form-control" id="bdate" name="bdate">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3 mt-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
         </form>
         <hr>
         <table class="table table-bordered table-sm table-striped table-hover">
@@ -68,22 +80,14 @@
                         <td><?php echo $row['gender']; ?></td>
                         <td><?php echo $row['bdate']; ?></td>
                         <td>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update_modal<?php echo $row['id']; ?>">
-                            Update
-                        </button>
-                            <form action="update.php/<?php echo $row['id']; ?>" method="post">
-                                <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
-                                <input type="submit" value="update">
-                            </form>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update_modal<?php echo $row['id']; ?>">
+                                Update
+                            </button>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal<?php echo $row['id']; ?>">
                                 Delete
                             </button>
-                            <form action="delete.php" method="post">
-                                <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
-                                <input type="submit" value="delete">
-                            </form>    
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -111,7 +115,7 @@
             <!-- Modal body -->
             
             <div class="modal-body">
-                <form action="../process/insert.php" method="post">
+                <form action="../process/update.php" method="post">
                     <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
                     <div class="mb-3 mt-3">
                         <label for="first_name" class="form-label">First Name:</label>
@@ -133,7 +137,19 @@
                         <label for="bdate" class="form-label">Birthdate:</label>
                         <input type="date" class="form-control" id="bdate" name="bdate" value="<?php echo $row['bdate']; ?>">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mb-3 mt-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" value="<?php echo $row['username']; ?>">
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" value="<?php echo $row['password']; ?>">
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="<?php echo $row['email']; ?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="update">Submit</button>
                 </form>
             </div>
             
@@ -159,29 +175,13 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="../process/insert.php" method="post">
+                <form action="../process/delete.php" method="post">
                     <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
                     <div class="mb-3 mt-3">
-                        <label for="first_name" class="form-label">First Name:</label>
-                        <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name" value="<?php echo $row['first_name']; ?>" disabled>
+                        <label for="confirm_delete" class="form-label">Are you sure to delete User with an ID : <strong><?php echo $row['id']; ?></strong>?</label>
+                        <input type="text" class="form-control" id="confirm_delete" placeholder="Type DELETE to confirm" name="confirm_delete">
                     </div>
-                    <div class="mb-3">
-                        <label for="last_name" class="form-label">Last Name:</label>
-                        <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name" value="<?php echo $row['last_name']; ?>" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gender" class="form-label">Gender:</label>
-                        <select name="gender" id="gender" class="form-select" disabled>
-                            <option value="<?php echo $row['gender']; ?>"><?php echo $row['id']; ?></option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="bdate" class="form-label">Birthdate:</label>
-                        <input type="date" class="form-control" id="bdate" name="bdate" value="<?php echo $row['bdate']; ?>" disabled>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="delete">Submit</button>
                 </form>
             </div>
 

@@ -10,21 +10,16 @@
 
     echo mysqli_connect_errno();
     
-    $first_name = mysqli_real_escape_string($db_con, $_POST['first_name']);
-    $last_name = mysqli_real_escape_string($db_con, $_POST['last_name']);
-    $gender = $_POST['gender'];
-    $bdate = $_POST['bdate'];
-
     if(isset($_POST['submit'])){
-        $query = "INSERT INTO user (first_name, last_name, gender, bdate) VALUES ('" . $first_name . "', '" . $last_name . "', '" . $gender . "', '" . $bdate . "')";
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $gender = $_POST['gender'];
+        $bdate = $_POST['bdate'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $query = "INSERT INTO user (first_name, last_name, gender, bdate, username, password, email) VALUES ('$first_name', '$last_name', '$gender', '$bdate', '$username', '$password', '$email')";
         $result = $db_con->query($query);
-
-        if($result === false){
-            echo 'Error inserting record: ' . $db_con->error;
-        }else{
-            header('Location: ../components/users.php');
-        }
-    }else{
         header('Location: ../components/users.php');
     }
     exit;
