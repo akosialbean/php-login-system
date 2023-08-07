@@ -17,7 +17,7 @@
         $bdate = $_POST['bdate'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $query = "INSERT INTO user (first_name, last_name, gender, bdate, username, password, email) VALUES ('$first_name', '$last_name', '$gender', '$bdate', '$username', '$password', '$email')";
         $result = $db_con->query($query);
         header('Location: ../components/users.php');
